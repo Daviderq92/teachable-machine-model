@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachable Machine Model</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.6/dist/teachablemachine-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.6/dist/teachablemachine-image.min.js" onerror="handleError()"></script>
+    <script>
+        function handleError() {
+            alert("Error: No se pudo cargar la biblioteca de Teachable Machine. Por favor, verifica tu conexión a Internet.");
+        }
+    </script>
 </head>
 <body>
     <h1>¡Bienvenido a mi modelo de Teachable Machine!</h1>
@@ -28,7 +33,7 @@
                 // Asegúrate de que la biblioteca tmImage esté cargada
                 if (typeof tmImage === 'undefined') {
                     console.error("Error: la biblioteca tmImage no está cargada.");
-                    alert("La biblioteca de Teachable Machine no se ha cargado correctamente. Por favor, intenta recargar la página.");
+                    alert("La biblioteca de Teachable Machine no se ha cargado correctamente. Por favor, recarga la página.");
                     return; // Detenemos la ejecución si no se carga
                 }
 
