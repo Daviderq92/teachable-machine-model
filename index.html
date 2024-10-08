@@ -24,15 +24,24 @@
 
             console.log("Cargando el modelo...");
 
-            // Carga el modelo
-            model = await tmImage.load(modelURL, metadataURL);
-            console.log("Modelo cargado.");
+            try {
+                // Verifica que la biblioteca tmImage se haya cargado
+                if (typeof tmImage === 'undefined') {
+                    throw new Error("Error: tmImage no está definido.");
+                }
 
-            webcam = new tmImage.Webcam(200, 200, true); // Crea una nueva instancia de la cámara
-            await webcam.setup(); // Esto pedirá permiso para usar la cámara
-            await webcam.play();
-            console.log("Cámara activada.");
-            window.requestAnimationFrame(loop);
+                // Carga el modelo
+                model = await tmImage.load(modelURL, metadataURL);
+                console.log("Modelo cargado.");
+
+                webcam = new tmImage.Webcam(200, 200, true); // Crea una nueva instancia de la cámara
+                await webcam.setup(); // Esto pedirá permiso para usar la cámara
+                await webcam.play();
+                console.log("Cámara activada.");
+                window.requestAnimationFrame(loop);
+            } catch (error) {
+                console.error("Error al inicializar:", error);
+            }
         }
 
         async function loop() {
