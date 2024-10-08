@@ -37,7 +37,14 @@
 
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            console.log(prediction);
+            const highestPrediction = prediction.reduce((max, p) => p.probability > max.probability ? p : max, prediction[0]);
+            
+            console.log(highestPrediction);
+            
+            // Verifica si la probabilidad es mayor al 90%
+            if (highestPrediction.probability > 0.9) {
+                alert(`¡Reconocido! ${highestPrediction.className} con ${Math.round(highestPrediction.probability * 100)}% de certeza.`);
+            }
         }
 
         init();
