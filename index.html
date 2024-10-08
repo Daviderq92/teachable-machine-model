@@ -23,8 +23,8 @@
             const metadataURL = URL + "metadata.json";
 
             console.log("Cargando el modelo...");
-
-            // Verifica si tmImage está definido
+            
+            // Verifica que la biblioteca tmImage se haya cargado
             if (typeof tmImage === 'undefined') {
                 console.error("Error: tmImage no está definido.");
                 return;
@@ -34,7 +34,7 @@
             model = await tmImage.load(modelURL, metadataURL);
             console.log("Modelo cargado.");
 
-            webcam = new tmImage.Webcam(200, 200, true);
+            webcam = new tmImage.Webcam(200, 200, true); // Crea una nueva instancia de la cámara
             await webcam.setup(); // Esto pedirá permiso para usar la cámara
             await webcam.play();
             console.log("Cámara activada.");
