@@ -22,10 +22,14 @@
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
 
+            console.log("Cargando el modelo...");
             model = await tmImage.load(modelURL, metadataURL);
+            console.log("Modelo cargado.");
+
             webcam = new tmImage.Webcam(200, 200, true);
             await webcam.setup(); // Esto pedirá permiso para usar la cámara
             await webcam.play();
+            console.log("Cámara activada.");
             window.requestAnimationFrame(loop);
         }
 
@@ -48,7 +52,8 @@
             }
         }
 
-        init();
+        // Llamar a la función init
+        init().catch(err => console.error("Error al inicializar:", err));
     </script>
 </body>
 </html>
