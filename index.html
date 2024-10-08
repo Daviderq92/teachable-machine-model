@@ -24,12 +24,13 @@
 
             console.log("Cargando el modelo...");
 
-            try {
-                // Verifica que la biblioteca tmImage se haya cargado
-                if (typeof tmImage === 'undefined') {
-                    throw new Error("Error: tmImage no está definido.");
-                }
+            // Carga la biblioteca de Teachable Machine
+            if (typeof tmImage === 'undefined') {
+                console.error("Error: la biblioteca tmImage no está cargada.");
+                return; // Detenemos la ejecución si no se carga
+            }
 
+            try {
                 // Carga el modelo
                 model = await tmImage.load(modelURL, metadataURL);
                 console.log("Modelo cargado.");
