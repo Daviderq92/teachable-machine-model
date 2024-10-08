@@ -10,9 +10,12 @@
 <body>
     <h1>¡Bienvenido a mi modelo de Teachable Machine!</h1>
     <p>Aquí puedes cargar tu modelo y hacer predicciones.</p>
-    
+    <div>
+        <video id="webcam" width="200" height="200 autoplay></video>
+    </div>
+
     <script>
-        const URL = "https://teachablemachine.withgoogle.com/models/TuModelo/"; // Reemplaza "TuModelo" con el nombre de tu modelo
+        const URL = "https://teachablemachine.withgoogle.com/models/rlLgcZ9Gg/"; // URL de tu modelo
         let model, webcam;
 
         async function init() {
