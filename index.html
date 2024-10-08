@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachable Machine Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.6/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
     <h1>¡Bienvenido a mi modelo de Teachable Machine!</h1>
-    <p>Aquí es donde puedes cargar tu modelo y hacer predicciones.</p>
+    <p>Aquí puedes cargar tu modelo y hacer predicciones.</p>
+    
+    <script>
+        const URL = "https://teachablemachine.withgoogle.com/models/TuModelo/"; // Reemplaza "TuModelo" con el nombre de tu modelo
+        let model, webcam;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            webcam = new tmImage.Webcam(200, 200, true);
+            await webcam.setup(); // Esto pedirá permiso para usar la cámara
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+        }
+
+        async function loop() {
+            webcam.update(); // Actualiza la cámara
+            await predict();
+            window.requestAnimationFrame(loop);
+        }
+
+        async function predict() {
+            const prediction = await model.predict(webcam.canvas);
+            console.log(prediction);
+        }
+
+        init();
+    </script>
 </body>
 </html>
