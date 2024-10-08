@@ -11,7 +11,7 @@
     <h1>¡Bienvenido a mi modelo de Teachable Machine!</h1>
     <p>Aquí puedes cargar tu modelo y hacer predicciones.</p>
     <div>
-        <video id="webcam" width="200" height="200 autoplay></video>
+        <video id="webcam" width="200" height="200" autoplay></video>
     </div>
 
     <script>
@@ -32,14 +32,15 @@
         async function loop() {
             webcam.update(); // Actualiza la cámara
             await predict();
-            window.requestAnimationFrame(loop);
+            setTimeout(loop, 1000); // Espera 1 segundo antes de la próxima predicción
         }
 
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             const highestPrediction = prediction.reduce((max, p) => p.probability > max.probability ? p : max, prediction[0]);
-            
-            console.log(highestPrediction);
+
+            console.log("Predicciones:", prediction); // Muestra todas las predicciones
+            console.log("Predicción más alta:", highestPrediction); // Muestra la predicción más alta
             
             // Verifica si la probabilidad es mayor al 90%
             if (highestPrediction.probability > 0.9) {
