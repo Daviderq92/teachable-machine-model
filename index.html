@@ -23,6 +23,14 @@
             const metadataURL = URL + "metadata.json";
 
             console.log("Cargando el modelo...");
+
+            // Verifica si tmImage está definido
+            if (typeof tmImage === 'undefined') {
+                console.error("Error: tmImage no está definido.");
+                return;
+            }
+
+            // Carga el modelo
             model = await tmImage.load(modelURL, metadataURL);
             console.log("Modelo cargado.");
 
